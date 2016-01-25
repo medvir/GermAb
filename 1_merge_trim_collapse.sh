@@ -20,13 +20,14 @@ for i in $list; do
 	pandaseq -o $minimal -f ${dir}/${R1} -r ${dir}/${R2} -w ${name}_panda.fasta
 		
 	### trim random nucleotides and primer with primer_trim.py
-	fwd_primer="/data/AbX/germline/bin_pipeline/germlineprimer_fw.fasta"
-	rev_primer="/data/AbX/germline/bin_pipeline/germlineprimer_rv.fasta"
+	fwd_primer="/data/AbX/germline/GermAb/germlineprimer_fw.fasta"
+	rev_primer="/data/AbX/germline/GermAb/germlineprimer_rv.fasta"
 	echo trimming $name
-	/data/AbX/germline/bin_pipeline/primer_trim.py ${name}_panda.fasta fwd_primer rev_primer /data/AbX/germline/bin_pipeline/germlineprimer_rv.fasta > ${name}_trimmed.fasta
+	/data/AbX/germline/bin_pipeline/primer_trim.py ${name}_panda.fasta fwd_primer rev_primer /data/AbX/germline/GermAb/germlineprimer_rv.fasta > ${name}_trimmed.fasta
 	
 	### collapes unique reads, keep only if more than n members
 	echo collapsing $name
 	grep -v M0 ${name}_trimmed.fasta | sort | uniq -c | sort -nr | awk '$1>=10 {print ">"$1"\n"$2 }' > ${name}_uniq.fasta
 
 done
+

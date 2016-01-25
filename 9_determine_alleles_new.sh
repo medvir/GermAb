@@ -25,7 +25,7 @@ for i in $list; do
 		#n=length($reads)
 		
 		### get frequency drop   
-		j=$(python /data/AbX/germline/bin_pipeline/freq_drop.py $reads)
+		j=$(python /data/AbX/germline/GermAb/freq_drop.py $reads)
 		
 		###
 		grep "${g}\*" $i | head -$j | cut -f 1,2,3 | sed 's/"//g' | sed 's/*/./g' >> ${name}_alleles_final.txt
