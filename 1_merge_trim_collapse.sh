@@ -6,6 +6,8 @@
 
 dir=$1
 
+#gunzip ${dir}/*.gz
+
 ### create list of unzipped fastq files
 list=$(ls $dir | grep _L001_R1_001.fastq | grep -v .gz | grep -v Undetermined)
 
@@ -23,7 +25,7 @@ for i in $list; do
 	fwd_primer="/data/AbX/germline/GermAb/germlineprimer_fw.fasta"
 	rev_primer="/data/AbX/germline/GermAb/germlineprimer_rv.fasta"
 	echo trimming $name
-	/data/AbX/germline/bin_pipeline/primer_trim.py ${name}_panda.fasta fwd_primer rev_primer /data/AbX/germline/GermAb/germlineprimer_rv.fasta > ${name}_trimmed.fasta
+	/data/AbX/germline/GermAb/primer_trim.py ${name}_panda.fasta $fwd_primer $rev_primer > ${name}_trimmed.fasta
 	
 	### collapes unique reads, keep only if more than n members
 	echo collapsing $name
@@ -31,3 +33,4 @@ for i in $list; do
 
 done
 
+#gzip ${dir}/*.fastq

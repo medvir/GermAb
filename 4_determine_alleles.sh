@@ -2,12 +2,12 @@
 
 dir=$1
 
-list=$(ls $dir | grep _alleles.txt)
+list=$(ls $dir | grep _alleles_comb.txt)
 
 > all_results.txt
 
 for i in $list; do
-	name=$(echo $i | sed 's/_R_alleles.txt//')	
+	name=$(echo $i | sed 's/_alleles_comb.txt//')	
 	echo $name
 	
 	### create list of all genes

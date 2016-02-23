@@ -1,12 +1,12 @@
-#input data: _aligned_comb.txt (fastq data were stitched, trimmed, collapsed into unique sequences, seqs <10 reads discarded, aligned to IMGT reference, relevant columns from aligned sam file extracted into _aligned_comb.txt)
+#input data: _aligned.txt (fastq data were stitched, trimmed, collapsed into unique sequences, seqs <10 reads discarded, aligned to IMGT reference, relevant columns from aligned sam file extracted into _aligned_comb.txt)
 #this script filters functional seqs and combines identical seqs with 0, 1 and 2 mutations from reference using cigar strings; output is _R_alleles_comb.txt, contains readcount, allele, number mut from reference, gene
 
 # libaries
 library(dplyr)
 library(tidyr)
 
-folder <- "/Volumes/data/AbX/germline/160122/"
-filenames <- list.files(path = folder, pattern = "_aligned_comb.txt")
+folder <- "/Volumes/data/AbX/germline/first_run_151008/"
+filenames <- list.files(path = folder, pattern = "_aligned.txt")
 
 for (i in 1:length(filenames))
 {
@@ -68,11 +68,11 @@ for (i in 1:length(filenames))
     mutate(gene = sub("\\*.*", "", allele)) %>%
     select(readcount, allele, mutations, gene) %>%
     group_by(gene) %>%
-    arrange(gene, desc(readcount)) %>%
-    filter(readcount>25)
+    arrange(gene, desc(readcount)) #%>%
+    #filter(readcount>25)
   
   #write output
-    new.filename<-paste0("/Volumes/data/AbX/germline/160122/",substr(filenames[i],1,9),"_R_alleles_comb.txt")
+    new.filename<-paste0("/Volumes/data/AbX/germline/first_run_151008/",substr(filenames[i],1,9),"_alleles_comb.txt")
     write.table(all,new.filename, sep = "\t",row.names=F)
 }
   

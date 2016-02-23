@@ -22,7 +22,7 @@ def freq_drop(reads):
             changes.append(change)
             #print >> sys.stderr, changes
             d = changes.index(min(changes)) + 1
-            if reads[d-1] < 4 * reads[d]:
+            if reads[d-1] < 3 * reads[d]:
                 d = n
     return(d)
 
