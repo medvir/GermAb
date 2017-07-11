@@ -31,3 +31,6 @@ class TestFreqDrop(unittest.TestCase):
 
         reads = '1000', '990', '90', '88', '77'
         self.assertEqual(freq_drop.freq_drop(reads), 2)
+        
+        reads = '1076', '1006', '291', '207', '121', '28' , '25'
+        self.assertEqual(freq_drop.freq_drop(reads), 2)

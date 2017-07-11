@@ -16,15 +16,27 @@ def freq_drop(reads):
     if n == 1:
         d = 1
     else:
-        changes = []
         for i in range(1, n):
-            change = float(reads[i]) / float(reads[i-1])
-            changes.append(change)
-            #print >> sys.stderr, changes
-            d = changes.index(min(changes)) + 1
-            if reads[d-1] < 3 * reads[d]:
+            if float(reads[i-1]) >= 3 * float(reads[i]):
+                d = i
+                break
+            else:
                 d = n
+                
     return(d)
+    
+    
+    #else:
+    #    changes = []
+    #    for i in range(1, n):
+    #        change = float(reads[i]) / float(reads[i-1])
+    #        changes.append(change)
+    #        #print >> sys.stderr, changes
+    #        d = changes.index(min(changes)) + 1
+    #       if reads[d-1] < 3 * reads[d]:
+    #           d = n
+    
+    
 
 def main():
     reads = sys.argv[1:]

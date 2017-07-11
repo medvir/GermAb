@@ -6,7 +6,7 @@
 
 dir=$1
 
-#gunzip ${dir}/*.gz
+gunzip ${dir}/*.gz
 
 ### create list of unzipped fastq files
 list=$(ls $dir | grep _L001_R1_001.fastq | grep -v .gz | grep -v Undetermined)
@@ -33,4 +33,4 @@ for i in $list; do
 
 done
 
-#gzip ${dir}/*.fastq
+gzip ${dir}/*.fastq
